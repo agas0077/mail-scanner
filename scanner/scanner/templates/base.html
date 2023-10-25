@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        {% csrf_token %}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="{% static 'images/fav/favicon.ico' %}" type="image">
+        <link rel="icon" type="image/png" sizes="96x96" href="{% static 'images/fav/favicon-96x96.png' %}">
+        <link rel="icon"
+              type="image/png"
+              sizes="32x32"
+              href="{% static 'images/fav/favicon-32x32.png' %}">
+        <link rel="icon"
+              type="image/png"
+              sizes="16x16"
+              href="{% static 'images/fav/favicon-16x16.png' %}">
+        <meta name="msapplication-TileColor" content="#000">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
+        <link rel="stylesheet" href="{% static "css/custom-styles.css" %}">
+        {% block more_styles %}{% endblock more_styles %}
+        <script type="text/javascript" src="{% static 'js/bootstrap.bundle.js'%}"></script>
+        <script src="{% static 'js/jquery.js' %}"></script>
+        {% block more_scripts %}{% endblock more_scripts %}
+        <title>
+            {% block title %}
+            {% endblock title %}
+        </title>
+    </head>
+    <body>
+        <header>
+            {% include 'includes/header.html' %}
+        </header>
+        <main>
+            <div class="container">
+                {% block content %}Контент не подвезли :( {% endblock %}
+            </div>
+        </main>
+        <footer>
+            {% include 'includes/footer.html' %}
+        </footer>
+    </body>
+</html>

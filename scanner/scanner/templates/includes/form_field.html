@@ -1,0 +1,42 @@
+{% load user_filters %}
+{% load l10n %}
+<div class="form-outline mb-4">
+    {% if rows %}
+        <span class="fw-bold">{{ field.label }}</span>
+        {% if field.field.required %}<span class="text-danger">*</span>{% endif %}
+        <textarea name={{ name }} id="{{ id }}" class="form-control" rows={% if rows %}{{ rows }}{% else %}1{% endif %}>{% if value %}{{ value }}{% endif %} {% if validation %}onblur={{ validation }}{% endif %}</textarea>
+    {% elif type == 'file' %}
+        <span class="fw-bold">{{ field.label }}</span>
+        {% if field.field.required %}<span class="text-danger">*</span>{% endif %}
+        <input name={{ name }} type="file" class="form-control custom-file-input" id="{{ id }}" value="{% if value %}{{ value }}{% endif %}" />
+    {% elif type == 'select' %}
+        <span class="fw-bold">{{ field.label }}</span>
+        {% if field.required %}<span class="text-danger">*</span>{% endif %}
+        <select class="col-1 form-select"
+                aria-label="Default select"
+                id="{{ id }}"
+                name="{{ name }}">
+            {% for choice, verbose in field.choices %}
+                <option value="{{ choice }}"
+                        {% if value|to_int %} {% if value|to_int == choice.value|to_int %} selected{% endif %}{% endif %}>
+                    {{ verbose }}
+                </option>
+            {% endfor %}
+        </select>
+
+    {% elif type == 'number' %}
+        <span class="fw-bold">{{ field.label }}</span>
+        {% if field.field.required %}<span class="text-danger">*</span>{% endif %}
+        <input name={{ name }} type={{ type }} id={{ id }} class="form-control" value="{{ value|unlocalize }}" {% if validation %}onblur={{ validation }}{% endif %} step="0.01"/>
+    {% else %}
+        <span class="fw-bold">{{ field.label }}</span>
+        {% if field.field.required %}<span class="text-danger">*</span>{% endif %}
+        <input name={{ name }} type={{ type }} id={{ id }} class="form-control" value="{% if value %}{{ value }}{% endif %}" {% if validation %}onblur={{ validation }}{% endif %} />
+    {% endif %}
+
+    {% if type == 'select' %}
+        {% include "includes/form_field_error.html" with field=error_field %}
+    {% else %}
+        {% include "includes/form_field_error.html" with field=field %}
+    {% endif %}
+</div>

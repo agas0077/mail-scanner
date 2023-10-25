@@ -1,0 +1,35 @@
+{
+    "isort.importStrategy": "useBundled",
+    "markdown-pdf.convertOnSave": true,
+    "markdown-pdf.convertOnSaveExclude": [
+        "^work",
+        "work.md$",
+        "^(?![Rr][Ee][Aa][Dd][Mm][Ee]).*$",
+        "work|test",
+        "[0-9][0-9][0-9][0-9]-work",
+        "work\\test" // All '\' need to be written as '\\' (Windows)
+    ],
+    "markdown-pdf.type": [
+        "pdf"
+    ],
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.completeFunctionParens": false,
+    "python.formatting.provider": "black",
+    "python.formatting.blackPath": "${workspaceFolder}/.venv/Scripts/black.exe",
+    "python.formatting.blackArgs": [
+        "--line-length",
+        "79"
+    ],
+    "python.linting.enabled": true,
+    "python.linting.flake8Enabled": true,
+    "[python]": {
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true
+        },
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnSave": true,
+        "editor.formatOnType": true,
+        "editor.insertSpaces": true,
+        "editor.tabSize": 4
+    }
+}

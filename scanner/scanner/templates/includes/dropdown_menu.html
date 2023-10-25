@@ -1,0 +1,19 @@
+{% if dropdown_menu %}
+  {% with request.path as current_url %}
+    <div class="dropdown show">
+      <a class="nav-link bg-secondary text-light dropdown-toggle"
+         href="#"
+         role="button"
+         id="dropdownMenuLink"
+         data-bs-toggle="dropdown"
+         aria-haspopup="true"
+         aria-expanded="false">Меню</a>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        {% for name, url in dropdown_menu %}
+          <a href="{{ url }}"
+             class="dropdown-item {% if current_url == url %}active{% endif %}">{{ name }}</a>
+        {% endfor %}
+      </div>
+    </div>
+  {% endwith %}
+{% endif %}

@@ -1,0 +1,28 @@
+{% load static %}
+{% url 'users:logout' as logout_url %}
+{% url 'admin:index' as admin_url %}
+{% with request.path as current_url %}
+    <div class="container">
+        <header class="d-flex justify-content-between align-items-center mb-4 py-3 border-bottom">
+            <img style="object-fit:scale-down;
+                        width:50px;
+                        height:auto"
+                 src="{% static 'images/logo.jpg' %}" />
+            {% if request.user.is_authenticated %}
+                <ul class="nav nav-pills">
+                    <li class="nav-item me-2">
+                        {% include 'includes/dropdown_menu.html' %}
+                    </li>
+                    {% if request.user.is_staff %}
+                        <li class="nav-item me-2">
+                            <a href={{ admin_url }} class="nav-link bg-secondary text-light">Админка</a>
+                        </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a href={{ logout_url }} class="nav-link bg-secondary text-light">Выйти</a>
+                    </li>
+                </ul>
+            {% endif %}
+        </header>
+    </div>
+{% endwith %}

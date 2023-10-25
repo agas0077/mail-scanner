@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load static %}
+{% load render_table from django_tables2 %}
+{% load bootstrap3 %}
+{% block title %}
+  Saving Tracker
+{% endblock title %}
+{% block content %}
+  {% render_table table "includes/task_table.html" %}
+{% endblock content %}

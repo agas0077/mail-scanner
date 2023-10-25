@@ -1,0 +1,6 @@
+{% if form.errors %}
+    {% comment %} {% for field in form %}
+        {% for error in field.errors %}<div class="alert alert-danger">{{ error|escape }}</div>{% endfor %}
+    {% endfor %} {% endcomment %}
+    {% for error in form.non_field_errors %}<div class="p-1 alert alert-danger">{{ error|escape }}</div>{% endfor %}
+{% endif %}

@@ -1,0 +1,35 @@
+{% if table.page.has_other_pages %}
+    <nav aria-label="Page navigation" class="my-5">
+        <ul class="pagination">
+            {% if table.page.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page=1&amp;{{ GET_params.urlencode }}">Первая</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ table.page.previous_page_number }}&amp;{{ GET_params.urlencode }}">Предыдущая</a>
+                </li>
+            {% endif %}
+            {% for i in table.page.paginator.page_range %}
+                {% if i < table.page.number|add:3 and i > table.page.number|add:"-3" %}
+                    {% if table.page.number == i %}
+                        <li class="page-item active">
+                            <span class="page-link">{{ i }}</span>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ i }}&amp;{{ GET_params.urlencode }}">{{ i }}</a>
+                        </li>
+                    {% endif %}
+                {% endif %}              
+            {% endfor %}
+            {% if table.page.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ table.page.next_page_number }}&amp;{{ GET_params.urlencode }}">Следующая</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ table.page.paginator.num_pages }}&amp;{{ GET_params.urlencode }}">Последняя</a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endif %}
